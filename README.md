@@ -1,23 +1,46 @@
-# 🎵 FMA Music Mood Classifier
+```markdown
+# Music Mood Classifier
 
-A machine learning system that analyzes audio features from the Free Music Archive (FMA) dataset to automatically detect whether a song conveys an ENERGETIC, HAPPY, or RELAXED mood.
+## Project Overview
+AI system that detects emotional mood (happy, sad, energetic, calm, neutral) from music using audio feature extraction and machine learning.
 
-The model extracts acoustic characteristics including tempo, rhythm, spectral features, MFCCs, and harmony metrics, then uses a Random Forest classifier to predict the emotional mood independent of lyrics. The system achieves 65-75% accuracy on the FMA Small dataset (8,000 tracks, 30-second clips).
+## Dataset
+**Source:** GTZAN Dataset - Music Genre Classification (Kaggle)  
+**URL:** https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification  
+**Setup:** Download dataset, extract ZIP, copy all .wav files from `genres_original` folder into `data/` folder in project directory.
 
-## Mood Categories
+## Setup Instructions
 
-- **ENERGETIC:** Fast tempo (>120 BPM), strong rhythmic drive, high spectral centroid, high percussive energy
-- **HAPPY:** Major key signatures, bright timbre, moderate-to-high energy, positive melodic contours  
-- **RELAXED:** Slow tempo (<90 BPM), smooth dynamics, low percussive energy, high harmonic ratio
+**1. Install Python 3.11** (Python 3.13 has compatibility issues with librosa)
 
-## Key Features Extracted
+**2. Install dependencies:**
+```bash
+pip install numpy pandas scikit-learn matplotlib seaborn joblib librosa soundfile tqdm
+```
 
-- Tempo (BPM) and beat strength
-- RMS energy (mean and standard deviation)
-- Spectral centroid, rolloff, and bandwidth
-- 20 MFCC coefficients (mean and standard deviation)
-- Chroma features for harmony analysis
-- Zero crossing rate
-- Harmonic-percussive ratio
+**3. Extract audio features:**
+```bash
+python main.py
+```
 
-The trained model can predict mood for any uploaded audio file (MP3, WAV, FLAC) and provides confidence scores and probability distributions across all three mood categories.
+**4. Train machine learning model:**
+```bash
+python enhanced_model.py
+```
+
+**5. Test predictions:**
+```bash
+python predict_mood.py
+```
+
+## Technologies Used
+- **Librosa** - Audio feature extraction
+- **Scikit-learn** - Random Forest classifier
+- **Pandas/NumPy** - Data processing
+- **Matplotlib/Seaborn** - Visualization
+- **Joblib** - Model persistence
+
+## Notes
+- Python 3.11 required (3.13 not supported due to aifc module removal)
+- Place all .wav files from `genres_original` folder into `data/` directory before running
+```
